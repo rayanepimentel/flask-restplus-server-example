@@ -1,4 +1,4 @@
-name: SecurityPipeline
+name: Horusec Scan
 
 on: [push]
 
@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Horusec Scan
     steps:
+      - uses: actions/checkout@v3
+
       - name: Run Horusec
         id: run_horusec
         uses: fike/horusec-action@v0.2.2

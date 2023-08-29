@@ -1,0 +1,25 @@
+name: SecurityPipeline
+
+on:
+#eventos
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+#trabalhos
+  horusec-security:
+    name: horusec-security
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+      with: # Necessário quando habilitado o autores de commit
+        fetch-depth: 0
+    - name: Setup Docker
+      uses: docker-practice/actions-setup-docker@v1
+    - name: Running Horusec Security
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest
+        horusec start -p="./"

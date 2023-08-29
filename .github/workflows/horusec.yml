@@ -1,13 +1,19 @@
 name: horusec
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  # Adjust to your repository's default branch
 
 jobs:
-  checking_code:
-    runs-on: ubuntu-latest
-    name: Horusec Scan
-    steps:
-      - name: Run Horusec
-        id: run_horusec
-        uses: fike/horusec-action@v0.2.2
+  horusec-analysis:
+    runs-on: ubuntu-latest  # You can choose the runner environment you prefer
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Horusec analysis
+        uses: docker://fike/horusec-action:v0.2.2
+        with:
+          arguments: --config-file-path=horusec-config.json

@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
-      with: # Necessário quando habilitado o autores de commit
+      with: 
         fetch-depth: 0
     - name: Setup Docker
       uses: docker-practice/actions-setup-docker@v1

@@ -23,7 +23,7 @@
   "horusecCliEnableInformationSeverity": false,
   "horusecCliEnableOwaspDependencyCheck": false,
   "horusecCliEnableShellcheck": false,
-  "horusecCliFalsePositiveHashes": null,
+  "horusecCliFalsePositiveHashes": ["b539a9cb8e86bbbcc492e42cc700561f2ff917fe34e0d03cdfa9a07f4bed68fa"],
   "horusecCliFilesOrPathsToIgnore": [
     "*tmp*",
     "**/.vscode/**"

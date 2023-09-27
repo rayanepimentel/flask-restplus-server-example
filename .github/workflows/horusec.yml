@@ -14,12 +14,21 @@ jobs:
         uses: fike/horusec-action@main
         with:
           arguments: "-c=horusec-config.json -p ./ -e=false"
-      - name: Check for Vulnerabilities
-        run: |
-          if grep -q "Total of Vulnerability CRITICAL is: 0" ${{ steps.run_horusec.outputs.stdout }}; then
-            echo "No vulnerabilities found."
-          else
-            echo "Vulnerabilities found, creating an issue..."
-            # Aqui você pode adicionar um script ou comando para criar a issue quando são encontradas vulnerabilidades.
-            # Certifique-se de configurar as credenciais de autenticação adequadamente para criar a issue.
-          fi
+      - name: Log Horusec output
+        run: echo "${{ steps.run_horusec.outputs.stdout }}"
+      - name: Create Issue
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: vulnerabilities } = JSON.parse('${{ steps.run_horusec.outputs.stdout }}');
+            const title = 'Horusec Scan - Vulnerabilities Found';
+            const body = ` **Vulnerabilities Found:** \`\`\` ${JSON.stringify(vulnerabilities, null, 2)} \`\`\`
+
+            const { owner, repo } = context.repo;
+            const newIssue = await github.rest.issues.create({
+              owner: owner,
+              repo: repo,
+              title: title,
+              body: body
+            });

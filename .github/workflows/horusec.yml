@@ -14,3 +14,13 @@ jobs:
         uses: fike/horusec-action@main
         with:
           arguments: "-c=horusec-config.json -p ./ -e=false"
+      - name: Check for Vulnerabilities
+        run: |
+          if grep -q "Vulnerabilities found" ${{ steps.run_horusec.outputs.stdout }}; then
+            echo "Vulnerabilities found, creating an issue..."
+            # Você pode adicionar aqui um script ou comando para criar uma issue.
+            # Por exemplo, você pode usar a API do GitHub para criar uma issue usando curl.
+            # Certifique-se de configurar as credenciais de autenticação adequadamente para criar a issue.
+          else
+            echo "No vulnerabilities found."
+          fi

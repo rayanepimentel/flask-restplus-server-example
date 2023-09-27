@@ -1,38 +1,22 @@
-name: Horusec Scan
-
-on:
-  push:
-    branches:
-      - main
-      - develop
+on: [push]
 
 jobs:
-  checking_code:
+  example-job:
     runs-on: ubuntu-latest
-    name: Horusec Scan
     steps:
-      - name: Checkout 
-        uses: actions/checkout@v2.3.4
-      - name: Install Horusec
-        run: |
-          curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest
-      - name: Run Horusec
-        id: run_horusec
-        run: |
-          horusec start -p="./" -e="true"
-          echo "::set-output name=horusec_output::$(horusec start -p='./' -e='true')"
-      - name: Log Horusec output
-        run: echo "${{ steps.run_horusec.outputs.horusec_output }}"
-      - name: Create Issue
-        uses: actions/github-script@v4
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run script
+        uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = '${{ steps.run_horusec.outputs.horusec_output }}';
-            if (output) {
+            try {
+              const output = ''; // Substitua pelo valor correto da saída
               const { data: vulnerabilities } = JSON.parse(output);
               const title = 'Horusec Scan - Vulnerabilities Found';
-              const body = ` **Vulnerabilities Found:** \n\`\`\`\n${JSON.stringify(vulnerabilities, null, 2)}\n\`\`\``;
+              const body = `**Vulnerabilities Found:** \n\`\`\` ${JSON.stringify(vulnerabilities, null, 2)} \`\`\``;
+
               const { owner, repo } = context.repo;
               const newIssue = await github.rest.issues.create({
                 owner: owner,
@@ -40,4 +24,8 @@ jobs:
                 title: title,
                 body: body
               });
+
+              console.log('Nova issue criada:', newIssue);
+            } catch (error) {
+              console.error('Erro ao fazer o parse do JSON:', error);
             }

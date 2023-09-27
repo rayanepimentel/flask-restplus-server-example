@@ -13,4 +13,4 @@ jobs:
         id: run_horusec
         uses: fike/horusec-action@main
         with:
-          arguments: -p ./ --log-level TRACE
+          arguments: "-c=horusec-config.json -p ./ -e=false"

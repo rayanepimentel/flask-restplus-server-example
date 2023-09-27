@@ -1,46 +1,18 @@
-name: Horusec Scan
+name: SecurityPipeline
+
 on: [push]
 
 jobs:
-  checking_code:
+  horusec-security:
+    name: horusec-security
     runs-on: ubuntu-latest
-
-    name: Horusec Scan
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2.3.4
-      - name: Install Horusec
-        run: |
-      - name: Run script
-          curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest
-        uses: actions/github-script@v6
-      - name: Run Horusec
-        id: run_horusec
-        run: |
-          horusec start -p="./" -e="true"
-          echo "::set-output name=horusec_output::$(horusec start -p='./' -e='true')"
-      - name: Log Horusec output
-        run: echo "${{ steps.run_horusec.outputs.horusec_output }}"
-      - name: Create Issue
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            try {
-              const output = ''; // Substitua pelo valor correto da saída
-              const { data: vulnerabilities } = JSON.parse(output);
-              const title = 'Horusec Scan - Vulnerabilities Found';
-              const body = `**Vulnerabilities Found:** \n\`\`\` ${JSON.stringify(vulnerabilities, null, 2)} \`\`\``;
-
-              const { owner, repo } = context.repo;
-              const newIssue = await github.rest.issues.create({
-                owner: owner,
-                repo: repo,
-                title: title,
-                body: body
-              });
-
-              console.log('Nova issue criada:', newIssue);
-            } catch (error) {
-              console.error('Erro ao fazer o parse do JSON:', error);
-            }
+    - name: Check out code
+      uses: actions/checkout@v2
+      with: # Necessário quando habilitado o autores de commit
+        fetch-depth: 0
+    - name: Run Horusec
+      id: run_horusec
+      uses: fike/horusec-action@v0.2.2
+      with:
+         arguments: "-c=horusec-config.json -p ./ -e=false"

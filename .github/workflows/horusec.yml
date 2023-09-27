@@ -16,11 +16,10 @@ jobs:
           arguments: "-c=horusec-config.json -p ./ -e=false"
       - name: Check for Vulnerabilities
         run: |
-          if grep -q "Vulnerabilities found" ${{ steps.run_horusec.outputs.stdout }}; then
-            echo "Vulnerabilities found, creating an issue..."
-            # Você pode adicionar aqui um script ou comando para criar uma issue.
-            # Por exemplo, você pode usar a API do GitHub para criar uma issue usando curl.
-            # Certifique-se de configurar as credenciais de autenticação adequadamente para criar a issue.
-          else
+          if grep -q "Total of Vulnerability CRITICAL is: 0" ${{ steps.run_horusec.outputs.stdout }}; then
             echo "No vulnerabilities found."
+          else
+            echo "Vulnerabilities found, creating an issue..."
+            # Aqui você pode adicionar um script ou comando para criar a issue quando são encontradas vulnerabilidades.
+            # Certifique-se de configurar as credenciais de autenticação adequadamente para criar a issue.
           fi

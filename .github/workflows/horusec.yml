@@ -7,11 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Horusec Scan
     steps:
-      - uses: actions/checkout@v3
-
+      - name: Checkout 
+        uses: actions/checkout@v2.3.4
       - name: Run Horusec
         id: run_horusec
-        uses: fike/horusec-action@v0.2.2
+        uses: fike/horusec-action@main
         with:
-          arguments: "-c=horusec-config.json -p ./ -e=false"
-
+          arguments: -p ./ --log-level TRACE

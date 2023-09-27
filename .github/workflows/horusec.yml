@@ -1,15 +1,30 @@
+name: Horusec Scan
 on: [push]
 
 jobs:
-  example-job:
+  checking_code:
     runs-on: ubuntu-latest
+
+    name: Horusec Scan
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
+        uses: actions/checkout@v2.3.4
+      - name: Install Horusec
+        run: |
       - name: Run script
+          curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest
         uses: actions/github-script@v6
+      - name: Run Horusec
+        id: run_horusec
+        run: |
+          horusec start -p="./" -e="true"
+          echo "::set-output name=horusec_output::$(horusec start -p='./' -e='true')"
+      - name: Log Horusec output
+        run: echo "${{ steps.run_horusec.outputs.horusec_output }}"
+      - name: Create Issue
+        uses: actions/github-script@v4
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             try {
               const output = ''; // Substitua pelo valor correto da saída

@@ -1,7 +1,10 @@
 name: horusec-scan
 
-on: [push]
-
+on:
+  push:
+    paths-ignore:
+      - '**/*test_permissions.py'
+    
 jobs:
   horusec-security:
     name: horusec-security
@@ -13,7 +16,6 @@ jobs:
           fetch-depth: 0
       - name: Run Horusec
         id: run_horusec
-        if: "!contains(github.event.head_commit.modified, 'test_permissions.py')"
         uses: fike/horusec-action@v0.2.2
         with:
           arguments: "-c=horusec-config.json -p ./"

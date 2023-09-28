@@ -3,7 +3,7 @@ name: horusec-scan
 on:
   push:
     paths-ignore:
-      - '**/**/test_permissions.py'
+      - 'tests/modules/users/test_permissions.py'
     
 jobs:
   horusec-security:

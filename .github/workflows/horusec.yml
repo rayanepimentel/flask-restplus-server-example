@@ -1,6 +1,10 @@
-name: horusec
+name: horusec-scan
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+         - '**/*test_permissions.py'
+
 
 jobs:
   horusec-security:

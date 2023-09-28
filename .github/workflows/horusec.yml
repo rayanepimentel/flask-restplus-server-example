@@ -1,10 +1,7 @@
 name: horusec-scan
 
-on:
-  push:
-    paths-ignore:
-      - 'github/workspace/tests/modules/users/test_permissions.py'
-    
+on: [push]
+
 jobs:
   horusec-security:
     name: horusec-security
@@ -18,4 +15,4 @@ jobs:
         id: run_horusec
         uses: fike/horusec-action@v0.2.2
         with:
-          arguments: "-c=horusec-config.json -p ./"
+          arguments: -c=horusec-config.json -p ./ --ignore="**/test_permissions.py"

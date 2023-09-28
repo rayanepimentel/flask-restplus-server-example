@@ -1,22 +1,19 @@
 name: horusec-scan
 
-on:
-  push:
-    paths-ignore:
-      - '**/*test_permissions.py'
-
+on: [push]
 
 jobs:
   horusec-security:
     name: horusec-security
     runs-on: ubuntu-latest
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-      with: # Necessário quando habilitado o autores de commit
-        fetch-depth: 0
-    - name: Run Horusec
-      id: run_horusec
-      uses: fike/horusec-action@v0.2.2
-      with:
-         arguments: "-c=horusec-config.json -p ./"
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run Horusec
+        id: run_horusec
+        if: "!contains(github.event.head_commit.modified, 'test_permissions.py')"
+        uses: fike/horusec-action@v0.2.2
+        with:
+          arguments: "-c=horusec-config.json -p ./"

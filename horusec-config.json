@@ -39,7 +39,8 @@
   "horusecCliFilesOrPathsToIgnore": [
     "*tmp*", 
     "**/.vscode/**", 
-    "**/modules/**"
+    "**/modules/**",
+    "**/tests/**"
   ],
   "horusecCliHeaders": {},
   "horusecCliHorusecApiUri": "http://0.0.0.0:8000",

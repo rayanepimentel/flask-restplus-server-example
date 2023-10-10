@@ -23,11 +23,20 @@
   "horusecCliEnableInformationSeverity": false,
   "horusecCliEnableOwaspDependencyCheck": false,
   "horusecCliEnableShellcheck": false,
-  "horusecCliFalsePositiveHashes": ["b539a9cb8e86bbbcc492e42cc700561f2ff917fe34e0d03cdfa9a07f4bed68fa"],
-  "horusecCliFilesOrPathsToIgnore": [
-    "*tmp*",
-    "**/.vscode/**"
+  "horusecCliFalsePositiveHashes": [
+    "b539a9cb8e86bbbcc492e42cc700561f2ff917fe34e0d03cdfa9a07f4bed68fa",
+    "d67b96fb7be4dab9b8cc26ad24a78db6d921ab7c66b5ef91d32f946651683e59",
+    "976914d6ca5cd701e86d8c8403e52e3422e2b4d9709074ce06cab20c071b5adc",
+    "c067b382a5f9ac41dc40803535ce3c53b9c17178b6e9168a80bdcc289d8aeb73",
+    "764d6deb56f2db8a1856cd1186cc44485c67e6369fe9c80209c3ad165019c290",
+    "02c542bad1c2b1be533f266dbb3467898fbe2133e63baad3178adeb76e7d54f9",
+    "b26ebc4ca8d7d38117258ec5f322e4ea61970e07820fb3d66bbb709d70853071",
+    "31f51c25ba2476a08f7b75de93a88197fd84e291e078b6602adcb440f5a0c24b",
+    "6d12090c39166359990389a6b5dfab55d905e1010d48203dc06973766dcb8781",
+    "922d738e7ba73c8953953b260ad3251c64d452343a299cbacfeb8851aea616a5",
+    "d5121e6e5b15cb72353ee9c2535a82a9e5a29d6b44076bb5edbf4c9b3f9f080d"
   ],
+  "horusecCliFilesOrPathsToIgnore": ["*tmp*", "**/.vscode/**", "**/tests/**"],
   "horusecCliHeaders": {},
   "horusecCliHorusecApiUri": "http://0.0.0.0:8000",
   "horusecCliJsonOutputFilepath": "",
@@ -39,12 +48,8 @@
   "horusecCliRepositoryName": "flask-restplus-server-example",
   "horusecCliReturnErrorIfFoundVulnerability": false,
   "horusecCliRiskAcceptHashes": null,
-  "horusecCliSeveritiesToIgnore": [
-    "INFO"
-  ],
-  "horusecCliShowVulnerabilitiesTypes": [
-    "Vulnerability"
-  ],
+  "horusecCliSeveritiesToIgnore": ["INFO"],
+  "horusecCliShowVulnerabilitiesTypes": ["Vulnerability"],
   "horusecCliTimeoutInSecondsAnalysis": 600,
   "horusecCliTimeoutInSecondsRequest": 300,
   "horusecCliToolsConfig": {

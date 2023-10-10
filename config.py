@@ -3,7 +3,7 @@ import os
 
 
 class BaseConfig(object):
-    SECRET_KEY = 'this-really-needs-to-be-changed'
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 

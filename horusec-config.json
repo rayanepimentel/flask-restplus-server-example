@@ -36,7 +36,11 @@
     "922d738e7ba73c8953953b260ad3251c64d452343a299cbacfeb8851aea616a5",
     "d5121e6e5b15cb72353ee9c2535a82a9e5a29d6b44076bb5edbf4c9b3f9f080d"
   ],
-  "horusecCliFilesOrPathsToIgnore": ["*tmp*", "**/.vscode/**", "**/tests/**"],
+  "horusecCliFilesOrPathsToIgnore": [
+    "*tmp*", 
+    "**/.vscode/**", 
+    "**/tests/**"
+  ],
   "horusecCliHeaders": {},
   "horusecCliHorusecApiUri": "http://0.0.0.0:8000",
   "horusecCliJsonOutputFilepath": "",
